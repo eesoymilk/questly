@@ -1,5 +1,5 @@
-import NewQuest from "./NewQuest";
-import QuestList from "./QuestList";
+import NewQuestTemplate from "./NewQuestTemplate";
+import QuestTemplateList from "./QuestTemplateList";
 import Separator from "./Separator";
 
-export { QuestList, NewQuest, Separator };
+export { QuestTemplateList, NewQuestTemplate, Separator };

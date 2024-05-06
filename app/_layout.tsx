@@ -1,16 +1,13 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
+import { DatabaseProvider } from "@nozbe/watermelondb/DatabaseProvider";
+import { ThemeProvider } from "@rneui/themed";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { Provider } from "jotai";
+import { Provider as JotaiProvider } from "jotai";
 import { useEffect } from "react";
 
-import { useColorScheme } from "@/components/useColorScheme";
+import { database } from "@/db/watermelon";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -26,17 +23,17 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 const RootLayoutNav = () => {
-  const colorScheme = useColorScheme();
-
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Provider>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-        </Stack>
-      </Provider>
-    </ThemeProvider>
+    <DatabaseProvider database={database}>
+      <JotaiProvider>
+        <ThemeProvider>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+          </Stack>
+        </ThemeProvider>
+      </JotaiProvider>
+    </DatabaseProvider>
   );
 };
 

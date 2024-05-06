@@ -1,7 +1,7 @@
 import { StyleSheet, ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { NewQuest, QuestList } from "@/components";
+import { NewQuestTemplate, QuestTemplateList } from "@/components";
 
 const HomeTabScreen = () => {
   const insets = useSafeAreaInsets();
@@ -14,8 +14,8 @@ const HomeTabScreen = () => {
         paddingLeft: insets.left,
         paddingRight: insets.right,
       }}>
-      <NewQuest />
-      <QuestList />
+      <NewQuestTemplate />
+      <QuestTemplateList />
     </ScrollView>
   );
 };

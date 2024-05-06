@@ -2,9 +2,12 @@ import { atom } from "jotai";
 
 import { Quest } from "@/types";
 
-export const newQuestAtom = atom<Omit<Quest, "id" | "completed">>({
+export const newQuestAtom = atom<Omit<Quest, "id">>({
+  type: "daily",
   title: "",
   description: "",
+  goal: null,
+  minProgress: null,
 });
 
 export const questsAtom = atom<Quest[]>([]);
