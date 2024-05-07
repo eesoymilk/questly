@@ -29,20 +29,10 @@
     },
     "plugins": [
       "expo-router",
-      ["@morrowdigital/watermelondb-expo-plugin"],
       [
-        "expo-build-properties",
+        "@react-native-google-signin/google-signin",
         {
-          "ios": {
-            "extraPods": [
-              {
-                "name": "simdjson",
-                "configurations": ["Debug", "Release"],
-                "path": "../node_modules/@nozbe/simdjson",
-                "modular_headers": true
-              }
-            ]
-          }
+          "iosUrlScheme": "com.googleusercontent.apps._some_id_here_"
         }
       ]
     ],

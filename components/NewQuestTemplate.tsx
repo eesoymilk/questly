@@ -1,31 +1,17 @@
-import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { Input, Button } from "@rneui/themed";
 import { useAtom } from "jotai";
 import { View, StyleSheet } from "react-native";
 
-import { QuestTemplate } from "@/model";
 import {
   newQuestTemplateAtom,
   addQuestTemplateAtom,
 } from "@/stores/questTemplate";
 
 const NewQuestTemplate = () => {
-  const db = useDatabase();
   const [newQuestTemplate, setNewQuestTemplate] = useAtom(newQuestTemplateAtom);
   const [, addQuestTemplate] = useAtom(addQuestTemplateAtom);
 
-  const questTemplatesCollection =
-    db.collections.get<QuestTemplate>("quest_templates");
-
-  const createQuestTemplate = async () => {
-    await questTemplatesCollection.create((questTemplate) => {
-      questTemplate.type = newQuestTemplate.type;
-      questTemplate.title = newQuestTemplate.title;
-      questTemplate.description = newQuestTemplate.description;
-      questTemplate.goal = newQuestTemplate.goal;
-      questTemplate.minProgress = newQuestTemplate.minProgress;
-    });
-  };
+  const createQuestTemplate = async () => {};
 
   return (
     <View style={styles.container}>
