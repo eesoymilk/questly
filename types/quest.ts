@@ -1,44 +1,25 @@
-import { User } from "./user";
+import { SnakeToCamelCase } from "@/types/caseConversion";
+import { Tables } from "@/types/supabase";
 
-export interface QuestTemplate {
-  id: string;
-  userId: string;
-  type: "daily" | "weekly" | "monthly";
-  title: string;
-  description: string;
-  goal: number | null;
-  minProgress: number | null;
+interface TimeStamp {
   createdAt: Date;
-  updatedAt: Date;
+  updatedAt: Date | null;
 }
 
-export interface QuestSchedule {
-  id: string;
-  name: string;
-  interval: number;
-  duration: number;
-}
+export type QuestTemplate = Omit<
+  SnakeToCamelCase<Tables<"quest_templates">>,
+  "createdAt" | "updatedAt" | "type"
+> & {
+  type: "daily" | "weekly" | "monthly";
+} & TimeStamp;
 
-export interface CustomQuestTemplate extends Omit<QuestTemplate, "type"> {
-  schedule: QuestSchedule;
-}
+export type NewQuestTemplate = Omit<
+  QuestTemplate,
+  "id" | "userId" | "createdAt" | "updatedAt"
+>;
 
 export interface Quest extends QuestTemplate {
   completedAt: Date | null;
   progress: number | null;
   questTemplateId: string;
-}
-
-export interface CustomQuest extends CustomQuestTemplate {
-  completedAt: Date | null;
-  progress: number | null;
-  questTemplateId: string;
-}
-
-export interface Milestone {
-  id: string;
-  user: Partial<User>;
-  quest: Partial<Quest>;
-  progress: number;
-  createdAt: Date;
 }

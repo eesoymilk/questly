@@ -1,6 +1,6 @@
+import { Button, Input } from "@rneui/themed";
 import React, { useState } from "react";
 import { Alert, StyleSheet, View, AppState } from "react-native";
-import { Button, Input } from "react-native-elements";
 
 import { supabase } from "@/db/supabase";
 
@@ -39,10 +39,12 @@ const Auth = () => {
       error,
     } = await supabase.auth.signUp({ email, password });
 
-    if (error) Alert.alert(error.message);
-    // if (!session) {
-    //   Alert.alert("Please check your inbox for email verification!");
-    // }
+    if (error) {
+      Alert.alert(error.message);
+    }
+    if (!session) {
+      Alert.alert("Please check your inbox for email verification!");
+    }
     setLoading(false);
   };
 

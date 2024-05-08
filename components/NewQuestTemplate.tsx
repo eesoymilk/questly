@@ -1,17 +1,15 @@
 import { Input, Button } from "@rneui/themed";
-import { useAtom } from "jotai";
 import { View, StyleSheet } from "react-native";
 
-import {
-  newQuestTemplateAtom,
-  addQuestTemplateAtom,
-} from "@/stores/questTemplate";
+import useQuestTemplate from "@/hooks/useQuestTemplate";
 
 const NewQuestTemplate = () => {
-  const [newQuestTemplate, setNewQuestTemplate] = useAtom(newQuestTemplateAtom);
-  const [, addQuestTemplate] = useAtom(addQuestTemplateAtom);
-
-  const createQuestTemplate = async () => {};
+  const {
+    newQuestTemplate,
+    loading,
+    insertQuestTemplate,
+    setNewQuestTemplate,
+  } = useQuestTemplate();
 
   return (
     <View style={styles.container}>
@@ -30,10 +28,12 @@ const NewQuestTemplate = () => {
         }
       />
       <Button
-        onPress={() => addQuestTemplate(newQuestTemplate)}
-        title="Add Quest Template"
+        title={loading ? "Loading ..." : "Add Quest Template"}
+        onPress={() => insertQuestTemplate(newQuestTemplate)}
         color="primary"
-        disabled={!newQuestTemplate.title || !newQuestTemplate.description}
+        disabled={
+          loading || !newQuestTemplate.title || !newQuestTemplate.description
+        }
       />
     </View>
   );

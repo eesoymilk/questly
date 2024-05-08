@@ -1,11 +1,6 @@
 import { atom } from "jotai";
 
-import { QuestTemplate } from "@/types";
-
-type NewQuestTemplate = Omit<
-  QuestTemplate,
-  "id" | "userId" | "createdAt" | "updatedAt"
->;
+import { NewQuestTemplate, QuestTemplate } from "@/types/quest";
 
 const blankQuestTemplate: NewQuestTemplate = {
   type: "daily",
@@ -27,7 +22,7 @@ export const addQuestTemplateAtom = atom(
       ...questTemplates,
       {
         ...newQuestTemplate,
-        id: String(questTemplates.length),
+        id: questTemplates.length,
         createdAt: new Date(),
         updatedAt: new Date(),
         userId: "1",
@@ -36,11 +31,3 @@ export const addQuestTemplateAtom = atom(
     set(newQuestTemplateAtom, blankQuestTemplate);
   },
 );
-
-// export const toggleQuestAtom = atom(null, (get, set, id: string) => {
-//   const quests = get(newQuestTemplateAtom);
-//   const updatedQuests = quests.map((quest) =>
-//     quest.id === id ? { ...quest, completed: !quest.completed } : quest,
-//   );
-//   set(newQuestTemplateAtom, updatedQuests);
-// });
