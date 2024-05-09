@@ -1,11 +1,9 @@
 import { Button, Input } from "@rneui/themed";
 import { useState, useEffect } from "react";
-import { StyleSheet, View, Alert } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { supabase } from "@/db/supabase";
 import useAuth from "@/hooks/useAuth";
-
-const profileTableName = "profiles";
 
 const Account = () => {
   const { session, profile, loading, updateProfile } = useAuth();
